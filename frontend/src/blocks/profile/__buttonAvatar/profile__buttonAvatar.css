@@ -1,0 +1,17 @@
+.profile__buttonAvatar {
+  background-image: url(../../../images/editAvatar.svg);
+  background-size: 26px 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  width: 120px;
+  height: 120px;
+  background-color: transparent;
+  padding: 0;
+}
+
+.profile__buttonAvatar:hover {
+  cursor: pointer;
+  z-index: 4;
+}
+

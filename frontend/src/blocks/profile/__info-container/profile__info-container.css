@@ -1,0 +1,13 @@
+.profile__info-container {
+  display: flex;
+  
+}
+
+@media screen and (max-width: 768px) {
+
+  .profile__info-container {
+    margin: 22px 0 14px;
+    display: grid;
+    grid-template-columns: 1fr min-content;
+  }
+}
