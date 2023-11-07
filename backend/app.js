@@ -1,8 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable indent */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 const express = require('express');
-// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
@@ -21,16 +22,10 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/notFoundErr');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.setHeade('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(requestLogger);
+app.use(cors());
 app.post(
   '/signup',
   celebrate({
