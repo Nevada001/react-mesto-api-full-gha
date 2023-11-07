@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { Joi, errors, celebrate } = require('celebrate');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -19,13 +20,12 @@ const cardsRoutes = require('./routes/cards');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/notFoundErr');
-const { corsChecking } = require('./middlewares/cors');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(requestLogger);
-app.use(corsChecking);
+app.use(cors());
 app.post(
   '/signup',
   celebrate({
