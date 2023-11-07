@@ -21,13 +21,13 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/notFoundErr');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-const allowCrossDomain = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeade('Access-Control-Allow-Headers', 'Content-Type');
   next();
-};
-app.use(allowCrossDomain);
+});
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(requestLogger);
