@@ -10,6 +10,10 @@ const bodyParser = require('body-parser');
 const { Joi, errors, celebrate } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const corsOptions = {
+  origin: 'nevada.nomoredomainsrocks.ru',
+  optionsSuccessStatus: 200,
+};
 const { PORT = 3000 } = process.env;
 const userRoutes = require('./routes/users');
 
@@ -22,7 +26,7 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/notFoundErr');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(requestLogger);
