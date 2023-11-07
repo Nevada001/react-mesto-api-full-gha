@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.nevada.nomoredomainsrocks.ru';
 
 function getResponse(res) {
   if (!res.ok) {
@@ -11,7 +11,10 @@ export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup` ,{
     method: 'POST',
     headers: {
-      "Content-Type": "application/json" 
+      "Content-Type": "application/json",
+      'Access-Control-Allow-Origin': '*',
+      "Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
     },
     body: JSON.stringify({email, password})
   })
@@ -22,7 +25,9 @@ export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin` ,{
     method: 'POST',
     headers: {
-      "Content-Type": "application/json" 
+      "Content-Type": "application/json",
+      "Origin": "https://nevada.nomoredomainsrocks.ru/",
+      "Host": "api.nevada.nomoredomainsrocks.ru"
     },
     body: JSON.stringify({email, password})
   })

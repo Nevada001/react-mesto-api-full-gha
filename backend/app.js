@@ -1,10 +1,14 @@
+/* eslint-disable indent */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 const express = require('express');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const { requestLogger, errorLogger } = require('./middlewares/logger')
 const { Joi, errors, celebrate } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const userRoutes = require('./routes/users');
@@ -15,11 +19,10 @@ const cardsRoutes = require('./routes/cards');
 
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-
 const NotFoundError = require('./errors/notFoundErr');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
-
+app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(requestLogger);
