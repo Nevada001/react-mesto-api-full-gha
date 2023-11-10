@@ -17,7 +17,7 @@ const app = express();
 
 const cardsRoutes = require('./routes/cards');
 
-const { createUser, login } = require('./controllers/users');
+const { createUser, login, updateUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/notFoundErr');
 
@@ -54,9 +54,19 @@ app.post(
   }),
   login,
 );
+
 app.use('/users', auth, userRoutes);
 app.use('/cards', auth, cardsRoutes);
-
+app.patch(
+  'users/me',
+  celebrate({
+    body: Joi.object().keys({
+      name: Joi.string().min(2).max(30).required(),
+      about: Joi.string().min(2).max(30).required(),
+    }),
+  }),
+  updateUser,
+);
 app.use('*', auth, (req, res, next) => next(new NotFoundError('Введенный ресурс не найден.')));
 app.use(errorLogger);
 app.use(errors());

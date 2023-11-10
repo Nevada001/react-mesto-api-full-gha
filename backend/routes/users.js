@@ -3,7 +3,6 @@ const { Joi, celebrate } = require('celebrate');
 const {
   getUsers,
   getUsersById,
-  updateUser,
   updateAvatar,
   getCurrentUser,
 } = require('../controllers/users');
@@ -18,16 +17,6 @@ userRoutes.get(
     }),
   }),
   getUsersById,
-);
-userRoutes.patch(
-  '/me',
-  celebrate({
-    body: Joi.object().keys({
-      name: Joi.string().min(2).max(30),
-      about: Joi.string().min(2).max(30),
-    }),
-  }),
-  updateUser,
 );
 userRoutes.patch(
   '/me/avatar',
