@@ -1,3 +1,4 @@
+export const token = localStorage.getItem("jwt");
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -71,9 +72,8 @@ class Api {
   }
 }
 
-const token = localStorage.getItem("jwt");
 export const api = new Api({
-  baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
+  baseUrl: "http://localhost:3000",
   headers: {
     authorization: `Bearer ${token}`,
     "Content-Type": "application/json",

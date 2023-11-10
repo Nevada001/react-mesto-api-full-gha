@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://api.nevada.nomoredomainsrocks.ru'
+
+export const BASE_URL = 'http://localhost:3000'
 function getResponse(res) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);
@@ -7,11 +8,12 @@ function getResponse(res) {
 } 
 
 export const register = (email, password) => {
+
   return fetch(`${BASE_URL}/signup` ,{
     method: 'POST',
-    headers: {
-      "Content-Type": "application/json" 
-    },
+      headers: {
+    "Content-Type": "application/json",
+  },
     body: JSON.stringify({email, password})
   })
   .then(getResponse) 
@@ -21,7 +23,7 @@ export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin` ,{
     method: 'POST',
     headers: {
-      "Content-Type": "application/json" 
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({email, password})
   })
