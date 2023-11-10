@@ -58,7 +58,7 @@ app.post(
 app.use('/users', auth, userRoutes);
 app.use('/cards', auth, cardsRoutes);
 app.patch(
-  'users/me',
+  '/users/me',
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30).required(),
