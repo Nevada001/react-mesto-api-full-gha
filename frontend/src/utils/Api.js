@@ -78,8 +78,9 @@
 
 
 export const api = new Api({
-  baseUrl: "https://api.nevada.nomoredomainsrocks.ru/",
+  baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
   headers: {
+    authorization: "7b17248a-4f40-4b14-bba1-0f66717e7e72",
     "Content-Type": "application/json",
   },
 });

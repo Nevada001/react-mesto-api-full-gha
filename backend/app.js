@@ -23,9 +23,10 @@ const NotFoundError = require('./errors/notFoundErr');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(helmet());
-app.use(bodyParser.json());
-app.use(requestLogger);
 app.use(cors());
+app.use(requestLogger);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.post(
   '/signup',
   celebrate({

@@ -38,6 +38,7 @@ module.exports.getCardsByIdAndRemove = (req, res, next) => {
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
+  console.log(req.body);
   const owner = req.user._id;
   Card.create({ name, link, owner })
     .then((cards) => res.status(Status.CREATED).send(cards))

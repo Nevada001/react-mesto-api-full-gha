@@ -88,13 +88,14 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
+  console.log(req.body);
   Users.findByIdAndUpdate(
     req.user._id,
     { name, about },
     { new: true, runValidators: true },
   )
     .orFail(new NotFoundError('Пользователь не найден'))
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch((err) => {
       if (err instanceof ValidationError) {
         return next(new BadRequestError('Ошибка валидации полей'));
