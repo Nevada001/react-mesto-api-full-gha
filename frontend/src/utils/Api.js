@@ -2,12 +2,8 @@ class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._validateRes = this._validateRes.bind(this);
-    //this._token = this._token();
+    this._headers = options.headers;
   }
-
-  //_token() {
-  //  return  localStorage.getItem('jwt');
-//  } 
 
   _validateRes(res) {
     if (res.ok) {
@@ -17,94 +13,69 @@ class Api {
   }
 
   setUserInfo(name, about) {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about,
       }),
-    })
-      .then(this._validateRes)
+    }).then(this._validateRes);
   }
 
   getUserInfo() {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: `Bearer ${token}`
-      }
-    })
-      .then(this._validateRes)
+      headers: this._headers,
+    }).then(this._validateRes);
   }
 
   getInitialCards() {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: `Bearer ${token}`
-      }
-    })
-      .then(this._validateRes)
+      headers: this._headers,
+    }).then(this._validateRes);
   }
 
-
-
   addNewCard(name, link) {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link,
       }),
-    })
-      .then(this._validateRes)
+    }).then(this._validateRes);
   }
 
   changeLikeCardStatus(cardItem, isLike) {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards/${cardItem}/likes`, {
-      method: isLike ? 'PUT' : 'DELETE',
-      headers: {
-        authorization: `Bearer ${token}`
-      },
-    })
-      .then(this._validateRes)
+      method: isLike ? "PUT" : "DELETE",
+      headers: this._headers,
+    }).then(this._validateRes);
   }
 
   removeCard(cardItem) {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards/${cardItem._id}`, {
       method: "DELETE",
-      headers: {
-        authorization: `Bearer ${token}`
-      },
-    })
-      .then(this._validateRes)
+      headers: this._headers,
+    }).then(this._validateRes);
   }
 
   changeUserAvatar(avatar) {
-    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: `Bearer ${token}`
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar,
       }),
-    })
-      .then(this._validateRes)
+    }).then(this._validateRes);
   }
 }
 
+const token = localStorage.getItem("jwt");
 export const api = new Api({
-  baseUrl: "http://localhost:3000"
-})
+  baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
+  headers: {
+    authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  },
+});
