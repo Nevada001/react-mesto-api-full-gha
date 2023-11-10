@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+
+const { JWT_SECRET } = process.env;
 const UnAuthorizedError = require('../errors/unAuthorized');
 
 const extractBearerToken = (header) => header.replace('Bearer ', '');
@@ -12,9 +14,9 @@ module.exports = (req, res, next) => {
   const token = extractBearerToken(authorization);
   let payload;
   try {
-    payload = jwt.verify(token, 'super-secret');
+    payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    return next(new UnAuthorizedError('Необходимdsfsdfsа авторизация'));
+    return next(new UnAuthorizedError('Необходима авторизация'));
   }
   req.user = payload;
   return next();

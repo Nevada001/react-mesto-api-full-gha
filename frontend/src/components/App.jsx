@@ -33,7 +33,7 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [cardToBeDeleted, setCardToBeDeleted] = useState(null);
   const navigate = useNavigate();
-
+/*
   const tokenCheck = () => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
@@ -53,10 +53,12 @@ function App() {
         });
     }
   };
+  
+
   useEffect(() => {
     tokenCheck();
   }, [loggedIn, userEmail]);
-
+*/
   useEffect(() => {
     loggedIn ? navigate("/") : navigate("/sign-in");
 
