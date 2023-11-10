@@ -1,5 +1,4 @@
-export const BASE_URL = 'https://api.nevada.nomoredomainsrocks.ru';
-
+export const BASE_URL = 'http://localhost:3000'
 function getResponse(res) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);

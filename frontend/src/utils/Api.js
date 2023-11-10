@@ -16,6 +16,21 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  setUserInfo(name, about) {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    })
+      .then(this._validateRes)
+  }
+
   getUserInfo() {
     const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me`, {
@@ -36,20 +51,7 @@ class Api {
       .then(this._validateRes)
   }
 
-  setUserInfo(name, about) {
-    const token = localStorage.getItem('jwt');
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: {
-        authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
-    })
-      .then(this._validateRes)
-  }
+
 
   addNewCard(name, link) {
     const token = localStorage.getItem('jwt');
@@ -104,5 +106,5 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
+  baseUrl: "http://localhost:3000"
 })

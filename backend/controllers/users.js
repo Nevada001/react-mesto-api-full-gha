@@ -90,8 +90,8 @@ module.exports.updateUser = (req, res, next) => {
   const { name, about } = req.body;
   console.log(req.body);
   Users.findByIdAndUpdate(
-    { name, about },
     req.user._id,
+    { name, about },
     { new: true, runValidators: true },
   )
     .orFail(new NotFoundError('Пользователь не найден'))
