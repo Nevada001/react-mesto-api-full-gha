@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new UnAuthorizedError('Необходима авторизация');
+    throw new UnAuthorizedError('Необходимffffа авторизация');
   }
   const token = extractBearerToken(authorization);
   let payload;

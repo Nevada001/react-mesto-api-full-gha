@@ -40,6 +40,7 @@ function App() {
       userAuth
         .getContent(jwt)
         .then((res) => {
+          console.log(res)
           if (res) {
             setLoggedIn(true);
             navigate("/");
