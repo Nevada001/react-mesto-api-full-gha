@@ -20,9 +20,11 @@ export const register = (email, password) => {
 }  
 
 export const authorize = (email, password) => {
+  const token = localStorage.getItem("jwt");
   return fetch(`${BASE_URL}/signin` ,{
     method: 'POST',
     headers: {
+      authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({email, password})
