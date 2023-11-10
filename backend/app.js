@@ -5,7 +5,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const path = require('path');
 const bodyParser = require('body-parser');
 const { Joi, errors, celebrate } = require('celebrate');
 const cors = require('cors');
