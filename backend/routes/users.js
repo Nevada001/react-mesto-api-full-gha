@@ -21,12 +21,7 @@ userRoutes.get(
 );
 userRoutes.patch(
   '/me',
-  celebrate({
-    body: Joi.object().keys({
-      name: Joi.string().min(2).max(30).required(),
-      about: Joi.string().min(2).max(30).required(),
-    }),
-  }),
+
   updateUser,
 );
 userRoutes.patch(
