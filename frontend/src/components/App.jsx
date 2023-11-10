@@ -3,7 +3,6 @@ import Main from "./Main";
 import Footer from "./Footer";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { api } from "../utils/Api";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { useEffect, useState } from "react";
 import { AppContext, CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -44,7 +43,7 @@ function App() {
           if (res) {
             setLoggedIn(true);
             navigate("/");
-            setUserEmail(res.data.email);
+            setUserEmail(res.email);
             setLogoutCaption("Выйти");
           }
         })
@@ -176,7 +175,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api

@@ -14,9 +14,9 @@ export default function Card({onCardLike, onCardDeleteClick, card, cardToBeDelet
     onCardLike(card);
   }
   const currentUser = React.useContext(CurrentUserContext);
-  const isLike = card.likes.some(like => like._id === currentUser._id);
+  const isLike = card.likes.some(like => like === currentUser._id);
   const cardHeartButtonClassName = (`card__heart ${isLike && 'card__heart_active'}`)
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   return (
     <li className="card">

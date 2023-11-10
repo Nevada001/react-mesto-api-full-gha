@@ -1,9 +1,13 @@
- class Api {
+class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
-    this._validateRes = this._validateRes.bind(this)
+    this._validateRes = this._validateRes.bind(this);
+    //this._token = this._token();
   }
+
+  //_token() {
+  //  return  localStorage.getItem('jwt');
+//  } 
 
   _validateRes(res) {
     if (res.ok) {
@@ -13,21 +17,32 @@
   }
 
   getUserInfo() {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`
+      }
     })
       .then(this._validateRes)
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
       .then(this._validateRes)
   }
 
   setUserInfo(name, about) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         about: about,
@@ -37,9 +52,12 @@
   }
 
   addNewCard(name, link) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -49,25 +67,34 @@
   }
 
   changeLikeCardStatus(cardItem, isLike) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards/${cardItem}/likes`, {
       method: isLike ? 'PUT' : 'DELETE',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`
+      },
     })
       .then(this._validateRes)
   }
 
   removeCard(cardItem) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/cards/${cardItem._id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`
+      },
     })
       .then(this._validateRes)
   }
 
   changeUserAvatar(avatar) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         avatar: avatar,
       }),
@@ -76,11 +103,6 @@
   }
 }
 
-
 export const api = new Api({
   baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
-  headers: {
-    authorization: "7b17248a-4f40-4b14-bba1-0f66717e7e72",
-    "Content-Type": "application/json",
-  },
-});
+})
