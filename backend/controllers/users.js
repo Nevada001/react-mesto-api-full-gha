@@ -3,6 +3,7 @@
 /* eslint-disable brace-style */
 /* eslint-disable no-else-return */
 /* eslint-disable consistent-return */
+const { NODE_ENV, JWT_SECRET } = process.env;
 const { ValidationError, CastError } = require('mongoose').Error;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -125,7 +126,7 @@ module.exports.login = (req, res, next) => {
   return Users.findUserByCredentials(email, password)
     .then((user) => {
       res.send({
-        token: jwt.sign({ _id: user._id }, 'super-secret', { expiresIn: '7d' }),
+        token: jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' }),
       });
     })
     .catch((err) => {

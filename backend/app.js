@@ -2,6 +2,7 @@
 /* eslint-disable indent */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
