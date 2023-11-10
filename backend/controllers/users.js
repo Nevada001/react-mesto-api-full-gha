@@ -126,7 +126,7 @@ module.exports.login = (req, res, next) => {
   return Users.findUserByCredentials(email, password)
     .then((user) => {
       res.send({
-        token: jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' }),
+        token: jwt.sign({ _id: user._id }, 'super-secret', { expiresIn: '7d' }),
       });
     })
     .catch((err) => {
