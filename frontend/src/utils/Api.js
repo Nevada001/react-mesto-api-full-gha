@@ -61,7 +61,7 @@ class Api {
   changeLikeCardStatus(cardItem, isLike) {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards/${cardItem}/likes`, {
-      method: "PUT",
+      method: isLike ? "PUT" : "DELETE",
       headers:  { 
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json", },
