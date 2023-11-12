@@ -92,5 +92,5 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
+  baseUrl: "http://localhost:3000",
 });
