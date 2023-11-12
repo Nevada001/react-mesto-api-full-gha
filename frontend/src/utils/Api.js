@@ -61,6 +61,7 @@ class Api {
   changeLikeCardStatus(cardItem, isLike) {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards/${cardItem}/likes`, {
+      method: "PUT",
       headers:  { 
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json", },
@@ -92,5 +93,5 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.nevada.nomoredomainsrocks.ru",
 });

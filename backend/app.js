@@ -2,7 +2,14 @@
 /* eslint-disable indent */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+const result = dotenv.config();
+if (result.error) {
+  throw result.error;
+}
+console.log(result.parsed);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
