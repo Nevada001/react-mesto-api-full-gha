@@ -2,13 +2,8 @@
 /* eslint-disable indent */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-const dotenv = require('dotenv');
+require('dotenv').config();
 
-const result = dotenv.config();
-if (result.error) {
-  throw result.error;
-}
-console.log(result.parsed);
 
 const express = require('express');
 const mongoose = require('mongoose');
