@@ -40,7 +40,6 @@ function App() {
       userAuth
         .getContent(jwt)
         .then((userData) => {
-          console.log(userData);
           if (userData) {
             setLoggedIn(true);
             navigate("/");
@@ -82,7 +81,7 @@ function App() {
           console.log(`Sorry, ${err}`);
         });
     }
-  },[loggedIn]);
+  }, [loggedIn]);
   function handleRegister({ email, password }) {
     return userAuth
       .register(email, password)
@@ -113,7 +112,6 @@ function App() {
 
       .then((res) => {
         if (res.token) {
-          console.log(res.token);
           setLoggedIn(true);
           localStorage.setItem("jwt", res.token);
         }
