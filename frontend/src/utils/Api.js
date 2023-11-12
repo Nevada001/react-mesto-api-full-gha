@@ -1,4 +1,3 @@
-
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -32,7 +31,6 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
     }).then(this._validateRes);
   }
@@ -42,7 +40,6 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
     }).then(this._validateRes);
   }
@@ -51,10 +48,9 @@ class Api {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
+      headers:  { 
         authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json", },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -65,11 +61,9 @@ class Api {
   changeLikeCardStatus(cardItem, isLike) {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards/${cardItem}/likes`, {
-      method: isLike ? "PUT" : "DELETE",
-      headers: {
+      headers:  { 
         authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json", },
     }).then(this._validateRes);
   }
 
@@ -77,10 +71,9 @@ class Api {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards/${cardItem._id}`, {
       method: "DELETE",
-      headers: {
+      headers:  { 
         authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json", },
     }).then(this._validateRes);
   }
 
@@ -88,10 +81,9 @@ class Api {
     const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
+      headers:  { 
         authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json", },
       body: JSON.stringify({
         avatar: avatar,
       }),

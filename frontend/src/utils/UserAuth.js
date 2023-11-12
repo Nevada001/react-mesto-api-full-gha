@@ -1,5 +1,6 @@
 
-export const BASE_URL = 'https://api.nevada.nomoredomainsrocks.ru'
+
+export const BASE_URL = 'https://api.nevada.nomoredomainsrocks.ru/'
 function getResponse(res) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);
@@ -20,11 +21,9 @@ export const register = (email, password) => {
 }  
 
 export const authorize = (email, password) => {
-  const token = localStorage.getItem("jwt");
   return fetch(`${BASE_URL}/signin` ,{
     method: 'POST',
     headers: {
-      authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({email, password})

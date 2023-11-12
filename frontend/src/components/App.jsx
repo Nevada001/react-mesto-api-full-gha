@@ -33,18 +33,19 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [cardToBeDeleted, setCardToBeDeleted] = useState(null);
   const navigate = useNavigate();
-/*
-  const tokenCheck = () => {
+
+  function tokenCheck() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       userAuth
         .getContent(jwt)
-        .then((res) => {
-          console.log(res)
-          if (res) {
+        .then((userData) => {
+          console.log(userData);
+          if (userData) {
             setLoggedIn(true);
             navigate("/");
-            setUserEmail(res.email);
+            setCurrentUser(userData);
+            setUserEmail(userData.email);
             setLogoutCaption("Выйти");
           }
         })
@@ -52,13 +53,12 @@ function App() {
           console.log(`Sorry, ${err}`);
         });
     }
-  };
-  
+  }
 
   useEffect(() => {
     tokenCheck();
   }, [loggedIn, userEmail]);
-*/
+
   useEffect(() => {
     loggedIn ? navigate("/") : navigate("/sign-in");
 
@@ -82,7 +82,7 @@ function App() {
           console.log(`Sorry, ${err}`);
         });
     }
-  }, [loggedIn]);
+  },[loggedIn]);
   function handleRegister({ email, password }) {
     return userAuth
       .register(email, password)
@@ -113,6 +113,7 @@ function App() {
 
       .then((res) => {
         if (res.token) {
+          console.log(res.token);
           setLoggedIn(true);
           localStorage.setItem("jwt", res.token);
         }
@@ -142,6 +143,7 @@ function App() {
 
   function handleLoginOut() {
     setUserEmail("");
+    setCurrentUser({});
     setLogoutCaption("");
     localStorage.removeItem("jwt");
     setLoggedIn(false);
